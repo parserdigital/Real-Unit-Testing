@@ -1,3 +1,7 @@
+/**
+ * Splitting the implementation allows to create a mock on isCanaryUp, isStale functions.
+ * Splitting the business logic allows to understand better the test cases.
+ */
 jest.mock('../../health-check/implementation');
 
 const healthCheck = require('../../health-check/health3');
@@ -10,6 +14,8 @@ describe('health check', () => {
 	});
 
 	test('Initial state, till checking', async () => {
+		// No waiting, we get the initial state. 
+		// function healthCheck is doing some asynchronous ops but the test is finished
 		expect(healthCheck()).toEqual({ name: 'canary check', ...states.INIT });
 	});
 	test('There is no canary deployment', async () => {

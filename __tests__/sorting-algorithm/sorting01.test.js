@@ -1,3 +1,10 @@
+/**
+ * Code is a liability, not an asset
+ * Testing code is a liability too.
+ * Poor tests are difficult to understand & maintain.
+ * Poor tests focus on code instead functionality, how instead of what
+ * Avoid mathematical formulas
+ */
 const sortingAlgorithm = require('../../sorting-algorithm/sorting01');
 
 describe('sorting algorithm', () => {

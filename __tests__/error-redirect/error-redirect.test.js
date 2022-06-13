@@ -1,4 +1,6 @@
-/* eslint-disable jest/no-focused-tests */
+/**
+ * This test suite is testing 2 functions: removeErrorFromUrl & removeErrorFromUrl
+ */
 const sinon = require('sinon');
 const middleware = require('../../error-redirect/error-redirect');
 
@@ -68,15 +70,28 @@ describe('Error URLs used for core experience', function () {
 		middleware(req, res, stubs.ext);
 
 		expect(res.redirect.calledWith('/foo')).toBeTruthy();
-		expect(res.locals.showError).toBe(false);
+		expect(res.locals.showError).toBeFalsy();
 	});
 
+	// This test case is testing removeErrorFromUrl
 	it('redirects the request and maintains other query params', () => {
 		req.originalUrl = '/foo?error=1497544780648&foo=bar'; // Thu Jun 15 2017 17:39:40 GMT+0100 (BST)
 		req.query.error = '1497544780648';
 		middleware(req, res, stubs);
 
 		expect(res.redirect.calledWith('/foo?foo=bar')).toBeTruthy();
-		expect(res.locals.showError).toBe(false);
+		expect(res.locals.showError).toBeFalsy();
 	});
+	// eslint-disable-next-line jest/no-commented-out-tests
+	/*
+	it('redirects the request but there is no match', () => {
+		req.originalUrl = '/foo?foo=bar&error=whatever';
+		req.query.error = '1497544780648';
+		middleware(req, res, stubs);
+
+		expect(res.redirect.calledWith(req.originalUrl)).toBeTruthy();
+		expect(res.locals.showError).toBeFalsy();
+	});
+	*/
+
 });
